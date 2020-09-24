@@ -12,4 +12,7 @@ git pull origin master
 git add .
 git commit -m "<message>"
 git push origin master
+
+// git push -u origin master 명령어 사용하면
+// 다음번 푸쉬때는 remote랑 브랜치없이 git push만 써도 푸쉬 됨.
 ```
