@@ -19,13 +19,14 @@ export class LikeScreen extends Component {
                     <ScrollView style={styles.feedContainer}>
                         <Like/>
                     </ScrollView>
+                    {/* 
                     <View style={styles.footer}>
                         <Image style={styles.icon} source={require('../images/home.png')}/>
                         <Image style={styles.icon} source={require('../images/rank.png')}/>
                         <Image style={styles.icon} source={require('../images/menu.png')}/>
                         <Image style={styles.icon} source={require('../images/like.png')}/>
                     </View>
-                
+                    */}
            </View>
         )
     }
