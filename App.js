@@ -4,6 +4,7 @@ import React from 'react';
 import {SafeAreaView, StyleSheet,ScrollView,View,Text,StatusBar, Image} from 'react-native';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {createAppContainer} from 'react-navigation';
+//import {createStackNavigator} from '@react-navigation/stack';
 import {Ionicons} from 'react-native-vector-icons';
 
 import Splashcreen from "./src/screen/SplashScreen";
@@ -12,32 +13,34 @@ import RankScreen from "./src/screen/RankScreen";
 import ProfileScreen from "./src/screen/ProfileScreen";
 import LikeScreen from "./src/screen/LikeScreen";
 
+
  const TabNavigator = createBottomTabNavigator({
-   Home: {
+   홈: {
     screen: HomeScreen,
    },
-   Rank: {
+   랭킹: {
     screen: RankScreen,
    },
-   Menu: {
+   전체메뉴: {
     screen: Splashcreen,
    },
-   Like: {
+   나의메뉴: {
     screen: LikeScreen
    }
  },
  {
    defaultNavigationOptions: ({navigation}) => ({
+     title: "마실랩",
      tabBarIcon: ({horizontal, tintColor}) => {
        const {routeName} = navigation.state;
        let iconName;
-       if(routeName === 'Home'){
+       if(routeName === '홈'){
         iconName = 'ios-home';
-       } else if(routeName === 'Rank'){
+       } else if(routeName === '랭킹'){
         iconName = 'ios-medal';
-       } else if(routeName === 'Menu'){
+       } else if(routeName === '전체메뉴'){
         iconName = 'ios-cafe';
-       } else if(routeName === 'Like'){
+       } else if(routeName === '나의메뉴'){
         iconName = 'ios-thumbs-up';
        }
        return (
@@ -48,8 +51,16 @@ import LikeScreen from "./src/screen/LikeScreen";
         />
        );
      }
-   })
- })
+   }),
+  tabBarOptions: {
+        activeTintColor: 'white',
+        inactiveTintColor: '#6D3E31',
+        style: {
+          backgroundColor: '#BDAFA2',
+        },
+      },
+ });
+
 /*
 const App: () => React$Node = () => {
   return (
@@ -58,7 +69,6 @@ const App: () => React$Node = () => {
   </View>
     );
 };
-*/
 
 const styles = StyleSheet.create({
   logo:{
@@ -71,4 +81,5 @@ const styles = StyleSheet.create({
   }
 });
 
+*/
 export default createAppContainer(TabNavigator);

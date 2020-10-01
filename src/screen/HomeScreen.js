@@ -2,9 +2,16 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Home from "../components/Home";
+import {Ionicons} from 'react-native-vector-icons';
 
 
 export class HomeScreen extends Component {
+    /*
+    static navigationOptions = {
+        title: '마실랩',
+        headerRight: <Ionicons name= 'ios-navigate' style={{paddingLeft:10}}/>
+    }
+    */
     render(){
         return (
            <View style={styles.container}>
@@ -43,8 +50,8 @@ export const styles=StyleSheet.create({
         display:'flex',
         flexDirection:'row',
         justifyContent:'space-between',
-        top:25,
-        padding:23,
+        top:20,
+        padding:15,
         borderBottomColor:Colors.grayl,
         borderBottomWidth:0.5
     },
@@ -62,8 +69,8 @@ export const styles=StyleSheet.create({
         flex:1
     },
     icon:{
-        width:40,
-        height:40
+        width:32,
+        height:32
     },
     logo:{
         width:150,
