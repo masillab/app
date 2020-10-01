@@ -7,6 +7,7 @@ export class ProfileScreen extends Component {
     render(){
         return (
             <View style={styles.container}> 
+            {/*
                 <View style = {styles.header}>
                     <View style={styles.leftHeaderWrap}>
                         <Image style={styles.leftarrow} source={require('../images/profile-sub/left-arrow.png')} />
@@ -16,8 +17,7 @@ export class ProfileScreen extends Component {
                         </View> 
                     </View>
                 </View>
-
-                
+            */}
 
                     <View style={styles.ProfileScreenWrap}>
                         <View style={styles.ImageSection}>

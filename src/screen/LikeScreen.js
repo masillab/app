@@ -1,3 +1,6 @@
+/* 나의메뉴 화면 구성
+ *  
+**/
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -8,26 +11,9 @@ export class LikeScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                {/*
-                <View style={styles.header}>
-                    <Image style={styles.icon} source={require('../images/gps.png')} />
-                    <Image style={styles.icon} source={require('../images/coffee.png')} />
-                    <View style={styles.headerRightWrap}>
-                        <Image style={styles.icon} source={require('../images/user.png')} />
-                    </View>
-                </View>
-                */}
                 <ScrollView style={styles.feedContainer}>
                     <Like />
                 </ScrollView>
-                {/* 
-                    <View style={styles.footer}>
-                        <Image style={styles.icon} source={require('../images/home.png')}/>
-                        <Image style={styles.icon} source={require('../images/rank.png')}/>
-                        <Image style={styles.icon} source={require('../images/menu.png')}/>
-                        <Image style={styles.icon} source={require('../images/like.png')}/>
-                    </View>
-                    */}
             </View>
         )
     }

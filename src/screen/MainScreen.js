@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Platform, View, Text, Image, ScrollView, Button } from 'react-native';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {Ionicons} from 'react-native-vector-icons';
+import gpsImg from '../images/gps.png';
 
 import Splashcreen from "./SplashScreen";
 import HomeScreen from "./HomeScreen";
@@ -61,7 +62,8 @@ const AppTabContainer = createAppContainer(TabNavigator);
 export default class MainScreen extends Component {
   static navigationOptions = {
       headerTitle: () => <Text style={{fontSize:30}}>마실랩</Text>,
-      headerRight: () => <Ionicons name='md-navigate' size={25} style={{ paddingRight:20 }}/>,
+      //headerLeft: () => <Ionicons name='md-navigate' size={25} color="#6D3E31" style={{ paddingRight:20 }}/>,
+      headerRight: () => <Ionicons name='md-navigate' size={30} color="#6D3E31" style={{ paddingRight:20 }}/>,
   }
   render() {
     return <AppTabContainer/>;
