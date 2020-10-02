@@ -5,30 +5,10 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, Button, AsyncStorage, TouchableOpacity, Alert } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { RadioButton } from 'react-native-paper';
+import AppButton from "../components/AppButton";
 import axios from 'axios';
 
 const APIURI = "http://ec2-3-34-96-202.ap-northeast-2.compute.amazonaws.com:3000/";
-
-TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
-
-const AppButton = ({ onPress, title, size, backgroundColor }) => (
-    <TouchableOpacity
-        onPress={onPress}
-        style={[
-            styles.appButtonContainer,
-            size === "sm" && {
-                paddingHorizontal: 8,
-                paddingVertical: 6,
-                elevation: 6
-            },
-            backgroundColor && { backgroundColor }
-        ]}
-    >
-        <Text style={[styles.appButtonText, size === "sm" && { fontSize: 14 }]}>
-            {title}
-        </Text>
-    </TouchableOpacity>
-);
 
 export default class SignUpScreen extends React.Component {
     state = {
@@ -143,24 +123,6 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    appButtonContainer: {
-        height: 36,
-        marginTop: 8,
-        marginLeft: 80,
-        marginRight: 80,
-        elevation: 8,
-        backgroundColor: "#009688",
-        borderRadius: 10,
-        paddingVertical: 10,
-        paddingHorizontal: 12
-    },
-    appButtonText: {
-        fontSize: 32,
-        color: "#fff",
-        fontWeight: "bold",
-        alignSelf: "center",
-        textTransform: "uppercase"
     },
     icon: {
         width: 32,
