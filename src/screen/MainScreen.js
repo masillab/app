@@ -61,7 +61,7 @@ const AppTabContainer = createAppContainer(TabNavigator);
 
 export default class MainScreen extends Component {
   static navigationOptions = {
-      headerTitle: () => <Text style={{fontSize:30}}>마실랩</Text>,
+      headerTitle: () => <Text style={{fontSize:24}}>마실랩</Text>,
       //headerLeft: () => <Ionicons name='md-navigate' size={25} color="#6D3E31" style={{ paddingRight:20 }}/>,
       headerRight: () => <Ionicons name='md-navigate' size={30} color="#6D3E31" style={{ paddingRight:20 }}/>,
   }
