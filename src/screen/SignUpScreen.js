@@ -6,7 +6,6 @@ import { StyleSheet, Text, View, Image, ScrollView, Button, AsyncStorage, Toucha
 import { TextInput } from 'react-native-gesture-handler';
 import { RadioButton } from 'react-native-paper';
 import AppButton from "../components/AppButton";
-import axios from 'axios';
 
 const APIURI = "http://ec2-3-34-96-202.ap-northeast-2.compute.amazonaws.com:3000/";
 
@@ -53,17 +52,17 @@ export default class SignUpScreen extends React.Component {
                         남자
                     </Text>
                     <RadioButton
-                        value="남자"
-                        status={checked === '남자' ? 'checked' : 'unchecked'}
-                        onPress={() => this.setState({ checked: '남자' })}
+                        value="male"
+                        status={checked === 'male' ? 'checked' : 'unchecked'}
+                        onPress={() => this.setState({ checked: 'male' })}
                     />
                     <Text>
                         여자
                     </Text>
                     <RadioButton
-                        value="여자"
-                        status={checked === '여자' ? 'checked' : 'unchecked'}
-                        onPress={() => this.setState({ checked: '여자' })}
+                        value="female"
+                        status={checked === 'female' ? 'checked' : 'unchecked'}
+                        onPress={() => this.setState({ checked: 'female' })}
                     />
                 </View>
                 <View style={{ margin: 20 }}></View>
@@ -76,10 +75,9 @@ export default class SignUpScreen extends React.Component {
             </View>
         );
     }
-    _signUpReq = () => {
-        axios.post(`${APIURI}signup`);
-    }
-    _signInAsync = async () => {
+
+    _signUpAsync = async () => {
+        let signUpAPI = APIURI + "api/user/signup";
         await AsyncStorage.setItem('userToken', 'abc');
         this.props.navigation.navigate('App');
     };

@@ -5,6 +5,7 @@ import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Image } fr
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
+import LogoutScreen from "./src/screen/LogoutScreen";
 import MainScreen from "./src/screen/MainScreen";
 import LoginScreen from "./src/screen/LoginScreen";
 import AuthLoadingScreen from "./src/screen/AuthLoadingScreen";
@@ -24,7 +25,16 @@ const AppStackNavigator = createStackNavigator(
         }
     }
 );
-const AuthStack = createStackNavigator({ SignIn: { screen: LoginScreen } });
+
+const AuthStack = createStackNavigator(
+    { 
+        SignIn: { screen: LoginScreen },
+        SignUp: { screen: SignUp }
+    },
+    {
+        initialRouteName: 'SignIn'
+    }
+);
 
 
 export default createAppContainer(
@@ -33,10 +43,9 @@ export default createAppContainer(
             AuthLoading: AuthLoadingScreen,
             App: AppStackNavigator,
             Auth: AuthStack,
-            SignUp: SignUp,
         },
         {
-            initialRouteName: 'Auth',
+            initialRouteName: 'AuthLoading',
         }
     )
 );

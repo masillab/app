@@ -2,10 +2,15 @@
  *  
 **/
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, Button, AsyncStorage, TouchableOpacity, Alert } from 'react-native';
+import {
+    StyleSheet,
+    View,
+    Image,
+    AsyncStorage,
+    Alert
+} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import AppButton from "../components/AppButton";
-import axios from 'axios';
 const APIURI = "http://ec2-3-34-96-202.ap-northeast-2.compute.amazonaws.com:3000/";
 
 
@@ -51,18 +56,21 @@ export default class LoginScreen extends React.Component {
     }
 
     _signInAsync = async () => {
-        /*
         let userEmail = this.state.email;
-        await axios.get(`${APIURI}getUserByEmail/${userEmail}`)
-            .then((res) => {
-                Alert.alert(res);
-            })
-            .catch((err) => {
-                Alert.alert(err);
-            })
-          */  
-        await AsyncStorage.setItem('userToken', 'abc');
-        this.props.navigation.navigate('App');
+        let loginAPI = APIURI + "api/user/getUserByEmail/" + userEmail;
+        try {
+            let res = await fetch(loginAPI);
+            let userJson = await res.json();
+            if (this.state.password === userJson.password) {
+                await AsyncStorage.setItem('userToken', userEmail);
+                this.props.navigation.navigate('App');
+
+            } else {
+                Alert.alert('실패', '비밀번호가 틀렸습니다.');
+            }
+        } catch (err) {
+            Alert.alert('err : ', err.message);
+        }
     };
 }
 
