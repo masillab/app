@@ -10,14 +10,19 @@ import MainScreen from "./src/screen/MainScreen";
 import LoginScreen from "./src/screen/LoginScreen";
 import AuthLoadingScreen from "./src/screen/AuthLoadingScreen";
 import SignUp from "./src/screen/SignUpScreen";
+import GpsScreen from "./src/screen/GpsScreen";
 
 const AppStackNavigator = createStackNavigator(
     {
         Main: {
             screen: MainScreen // MainScreen 컴포넌트를 네비게이터에 등록
+        },
+        GPS: {
+            screen: GpsScreen
         }
     },
     {
+        initialRouteName: 'Main',
         defaultNavigationOptions: {
             headerStyle: {
                 backgroundColor: '#BDAFA2',

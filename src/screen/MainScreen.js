@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform, View, Text, Image, ScrollView, Button } from 'react-native';
+import { StyleSheet, Platform, View, Text, Image, ScrollView, Button, Alert } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Ionicons } from 'react-native-vector-icons';
 import gpsImg from '../images/gps.png';
@@ -9,7 +9,7 @@ import HomeScreen from "./HomeScreen";
 import RankScreen from "./RankScreen";
 import ProfileScreen from "./ProfileScreen";
 import LikeScreen from "./LikeScreen";
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, NavigationEvents } from 'react-navigation';
 
 const TabNavigator = createBottomTabNavigator(
     {
@@ -61,11 +61,24 @@ const TabNavigator = createBottomTabNavigator(
 const AppTabContainer = createAppContainer(TabNavigator);
 
 export default class MainScreen extends Component {
-    static navigationOptions = {
+    static navigationOptions = ({ navigation }) => ({
         headerTitle: () => <Text style={{ fontSize: 24 }}>마실랩</Text>,
         //headerLeft: () => <Ionicons name='md-navigate' size={25} color="#6D3E31" style={{ paddingRight:20 }}/>,
-        headerRight: () => <Ionicons name='md-navigate' size={30} color="#6D3E31" style={{ paddingRight: 20 }} />,
+        headerRight: () =>  <Ionicons.Button 
+                                name='md-navigate' 
+                                size={30} 
+                                color="#6D3E31"
+                                backgroundColor="#BDAFA2" 
+                                onPress={() => navigation.navigate('GPS')}
+                                style={{ paddingRight: 20 }} 
+                            />,
+    });
+
+    openGpsScreen() {
+        Alert.alert('pus');
+        this.props.navigation.navigate('Gps');
     }
+
     render() {
         return <AppTabContainer />;
     }
