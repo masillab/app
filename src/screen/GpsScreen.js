@@ -1,8 +1,10 @@
 /* GPS 화면
+expo install react-native-maps 해야됨 
  *  
 **/
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import MapView from 'react-native-maps';
+import { StyleSheet, Text, View, Image, ScrollView, Dimensions } from 'react-native';
 
 
 export class GpsScreen extends Component {
@@ -10,19 +12,26 @@ export class GpsScreen extends Component {
         return (
             <View style={styles.container}>
                 <Text>
-                    test
+                <MapView style={styles.mapStyle} />
                 </Text>
             </View>
         )
     }
 }
 
-export default GpsScreen
-
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
-        display: 'flex',
-        flex: 5
+      display: 'flex',  
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
-})
+    mapStyle: {
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height,
+    },
+  });
 
+
+export default GpsScreen
