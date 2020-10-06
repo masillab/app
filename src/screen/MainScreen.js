@@ -73,12 +73,7 @@ export default class MainScreen extends Component {
                                 style={{ paddingRight: 20 }} 
                             />,
     });
-
-    openGpsScreen() {
-        Alert.alert('pus');
-        this.props.navigation.navigate('Gps');
-    }
-
+    
     render() {
         return <AppTabContainer />;
     }

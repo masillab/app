@@ -11,7 +11,7 @@ const APIURI = "http://ec2-3-34-96-202.ap-northeast-2.compute.amazonaws.com:3000
 
 export default class SignUpScreen extends React.Component {
     state = {
-        checked: '남자',
+        checked: 'male',
         email: '',
         password: '',
         passwordCheck: '',
@@ -26,7 +26,7 @@ export default class SignUpScreen extends React.Component {
         const { checked } = this.state;
         return (
             <View >
-                <View style={{ margin: 100 }}></View>
+                <View style={{ margin: 30 }}></View>
                 <TextInput
                     style={styles.inputContainer}
                     placeholder="이메일"
@@ -35,15 +35,18 @@ export default class SignUpScreen extends React.Component {
                 <TextInput
                     style={styles.inputContainer}
                     placeholder="비밀번호"
+                    secureTextEntry={true}
                     onChangeText={text => this.setState({ password: text })}
                 />
                 <TextInput
                     style={styles.inputContainer}
                     placeholder="비밀번호 확인"
+                    secureTextEntry={true}
                     onChangeText={text => this.setState({ passwordCheck: text })}
                 />
                 <TextInput
                     style={styles.inputContainer}
+                    keyboardType="numeric"
                     placeholder="출생년도 ex:1995"
                     onChangeText={text => this.setState({ birthYear: text })}
                 />
@@ -69,7 +72,7 @@ export default class SignUpScreen extends React.Component {
                 <AppButton
                     title="회원가입"
                     size="sm"
-                    onPress={() => { Alert.alert('회원가입') }}
+                    onPress={this._signUpAsync}
                     backgroundColor="#6D3E31"
                 />
             </View>
@@ -78,8 +81,47 @@ export default class SignUpScreen extends React.Component {
 
     _signUpAsync = async () => {
         let signUpAPI = APIURI + "api/user/signup";
-        await AsyncStorage.setItem('userToken', 'abc');
-        this.props.navigation.navigate('App');
+        if(this.state.email.length < 1 ||
+            this.state.password.length < 1 ||
+            this.state.passwordCheck.length < 1 ||
+            this.state.birthYear.length < 1){
+                Alert.alert('오류', '비어있는 칸이 있습니다.')
+                return 0;
+        }
+        if(this.state.password !== this.state.passwordCheck){
+            Alert.alert('오류', '비밀번호 확인이 잘못되었습니다.');
+            return 0;
+        }
+        try{
+            const res = await fetch(signUpAPI, {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: this.state.email,
+                    password: this.state.password,
+                    birthYear: this.state.birthYear,
+                    gender: this.state.checked,
+                })
+            })
+            const resJson = await res.json();
+            if(resJson.result === 1){
+                await AsyncStorage.setItem('userToken', this.state.email);
+                this.props.navigation.navigate('App');
+            } else {
+                Alert.alert('오류', JSON.stringify({
+                    email: this.state.email,
+                    password: this.state.password,
+                    birthYear: this.state.birthYear,
+                    gender: this.state.checked,
+                }));
+                return;
+            }
+        } catch (err) {
+            Alert.alert('err', err.message);
+        }
     };
 }
 

@@ -1,6 +1,7 @@
 /* 나의메뉴 화면 구성
  *  
 **/
+import { Updates } from 'expo';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, Button, AsyncStorage, Alert } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -20,14 +21,14 @@ export class LikeScreen extends Component {
         const { email } = this.state;
         return (
             <View style={styles.container}>
-                <Text>
-                    {email}
-                </Text>
-                <Button
-                    title="logout"
-                    onPress={this.removeItemValue}
-                />
                 <ScrollView style={styles.feedContainer}>
+                    <Text>
+                        {email}
+                    </Text>
+                    <Button
+                        title="logout"
+                        onPress={this.removeItemValue}
+                    />
                     <Like />
                 </ScrollView>
             </View>
@@ -37,8 +38,8 @@ export class LikeScreen extends Component {
     async getUserEmail() {
         try {
             let userToken = await AsyncStorage.getItem('userToken');
-            this.setState({email: userToken});
-        } catch(err){
+            this.setState({ email: userToken });
+        } catch (err) {
             Alert.alert('err', err.message);
         }
     };
@@ -49,7 +50,8 @@ export class LikeScreen extends Component {
             if (token) {
                 await AsyncStorage.removeItem('userToken');
             }
-            Alert.alert('완료!', '재접속해주세요.')
+            Updates.reload();
+            //Alert.alert('완료!', '재접속해주세요.')
             //this.props.navigation.dispatch({type: 'Navigation/BACK'});
             return true;
         }
@@ -66,24 +68,6 @@ export const styles = StyleSheet.create({
     container: {
         display: 'flex',
         flex: 1
-    },
-    header: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        top: 25,
-        padding: 23,
-        borderBottomColor: Colors.grayl,
-        borderBottomWidth: 0.5
-    },
-    footer: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        bottom: 20,
-        padding: 17,
-        borderTopColor: Colors.grayl,
-        borderTopWidth: 0.5
     },
     feedContainer: {
         display: 'flex',
