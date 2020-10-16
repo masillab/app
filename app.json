@@ -19,6 +19,11 @@
     "ios": {
       "supportsTablet": true
     },
+    "android": { 
+      "package": "com.masilcompany.masillab", 
+      "config": { 
+        "googleMaps": { "apiKey": "AIzaSyAqN8OHUTOQAaQGu2-8wKlott1Y-y21T5s" } } 
+    },
     "web": {
       "favicon": "./assets/favicon.png"
     }

@@ -3,6 +3,7 @@
 **/
 import React, { Component } from 'react';
 import {
+    Text,
     StyleSheet,
     View,
     Image,
@@ -26,8 +27,11 @@ export default class LoginScreen extends React.Component {
 
     render() {
         return (
-            <View >
-                <Image style={styles.logo} source={require('../images/coffee.png')} />
+            <View style={styles.container}>
+                {/*<Image style={styles.logo} source={require('../images/coffee.png')} />*/}
+                <View style={{margin: 15}}></View>
+                <Text style={{fontSize: 20, display: 'flex', marginLeft: 50}}>로그인해주세요!</Text>
+                <View style={{margin: 15}}></View>
                 <TextInput
                     style={styles.inputContainer}
                     placeholder="이메일"
@@ -35,10 +39,11 @@ export default class LoginScreen extends React.Component {
                 />
                 <TextInput
                     style={styles.inputContainer}
+                    secureTextEntry={true}
                     placeholder="비밀번호"
                     onChangeText={text => this.setState({ password: text })}
                 />
-                <View style={{ margin: 20 }}></View>
+                <View style={{ margin: 30 }}></View>
                 <AppButton
                     title="로그인"
                     size="sm"
@@ -66,7 +71,7 @@ export default class LoginScreen extends React.Component {
                 this.props.navigation.navigate('App');
 
             } else {
-                Alert.alert('실패', '비밀번호가 틀렸습니다.');
+                Alert.alert('오류', '이메일 또는 비밀번호가 틀렸습니다.');
             }
         } catch (err) {
             Alert.alert('err : ', err.message);
@@ -78,7 +83,6 @@ export default class LoginScreen extends React.Component {
 export const styles = StyleSheet.create({
     container: {
         display: 'flex',
-        flex: 5
     },
     feedContainer: {
         display: 'flex',

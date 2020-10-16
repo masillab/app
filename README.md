@@ -8,6 +8,9 @@
 git fetch
 git pull origin master
 
+// 만약 추가된 모듈이 있다면
+npm i
+
 // 작업 끝났을 때
 git add .
 git commit -m "<message>"
