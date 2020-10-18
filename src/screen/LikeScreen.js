@@ -49,8 +49,8 @@ export class LikeScreen extends Component {
                 />
                 <View style={{ margin: 15 }}></View>
                 <View style={styles.coffeeContainer}>
-                    {this.state.coffees.map(n => (
-                        <Like coffeeId={n.coffeeId} />
+                    {this.state.coffees.map((n) => (
+                        <Like coffeeId={n.coffeeId} key={n.coffeeId} />
                     ))}
                 </View>
             </ScrollView>
