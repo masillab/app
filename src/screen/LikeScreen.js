@@ -50,12 +50,19 @@ export class LikeScreen extends Component {
                 <View style={{ margin: 15 }}></View>
                 <View style={styles.coffeeContainer}>
                     {this.state.coffees.map((n) => (
-                        <Like coffeeId={n.coffeeId} key={n.coffeeId} />
+                        <Like 
+                            navigation={this.props.navigation}
+                            coffeeId={n.coffeeId} 
+                            key={n.coffeeId} />
                     ))}
                 </View>
             </ScrollView>
         )
     };
+
+    getCoffee(){
+
+    }
 
     async removeItemValue() {
         let token = await AsyncStorage.getItem('userToken');

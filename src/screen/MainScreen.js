@@ -1,15 +1,56 @@
 import React, { Component } from 'react';
 import { StyleSheet, Platform, View, Text, Image, ScrollView, Button, Alert } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createStackNavigator } from 'react-navigation-stack';
 import { Ionicons } from 'react-native-vector-icons';
 import gpsImg from '../images/gps.png';
 
-import Splashcreen from "./SplashScreen";
+import AllCafeScreen from "./AllCafeScreen";
 import HomeScreen from "./HomeScreen";
 import RankScreen from "./RankScreen";
 import ProfileScreen from "./ProfileScreen";
 import LikeScreen from "./LikeScreen";
+import CafeMenuScreen from "./CafeMenuScreen";
+import CoffeeScreen from "./CoffeeScreen";
 import { createAppContainer, NavigationEvents } from 'react-navigation';
+
+const AllCafeStack = createStackNavigator(
+    {
+        AllCafe: {
+            screen: AllCafeScreen
+        },
+        CafeMenu: {
+            screen: CafeMenuScreen
+        }
+    },
+    {
+        initialRouteName: 'AllCafe',
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: '#BDAFA2',
+            }
+        }
+    }
+)
+
+const LikeStack = createStackNavigator(
+    {
+        Like: {
+            screen: LikeScreen
+        },
+        Coffee: {
+            screen: CoffeeScreen
+        }
+    },
+    {
+        initialRouteName: 'Like',
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: '#BDAFA2',
+            }
+        }
+    }
+)
 
 const TabNavigator = createBottomTabNavigator(
     {
@@ -20,10 +61,10 @@ const TabNavigator = createBottomTabNavigator(
             screen: RankScreen,
         },
         전체메뉴: {
-            screen: Splashcreen,
+            screen: AllCafeStack,
         },
         나의메뉴: {
-            screen: LikeScreen
+            screen: LikeStack,
         }
     },
     {

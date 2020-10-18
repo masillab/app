@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import {View, Text, Image, ImageBackground, StyleSheet, ScrollView} from 'react-native'
+import {View, Text, Image, ImageBackground, StyleSheet, TouchableOpacity} from 'react-native'
 const APIURI = "http://ec2-3-34-96-202.ap-northeast-2.compute.amazonaws.com:3000/";
 
-const Like = (props) => {
+const Like = ({ coffeeId, navigation }) => {
     const [cafeName, setCafeName] = useState('');
     const [coffeeName, setCoffeeName] = useState('');
     const [imgUri, setImgUri] = useState('src\images\coffee.png');
@@ -12,7 +12,7 @@ const Like = (props) => {
     });
 
     const getCoffeeData = async () => {
-        coffeeUri = APIURI + "api/coffee/getCoffeeById/" + props.coffeeId;
+        coffeeUri = APIURI + "api/coffee/getCoffeeById/" + coffeeId;
         try{
             let coffeeData = await fetch(coffeeUri);
             let coffeeJson = await coffeeData.json();
@@ -24,7 +24,13 @@ const Like = (props) => {
         }
     }
     return(
-        <View style={styles.container}> 
+        <TouchableOpacity 
+            onPress={() => {
+                navigation.navigate("Coffee", {
+                    coffeeId: coffeeId
+                })
+            }} 
+            style={styles.container} > 
             <ImageBackground style={styles.img} source={{ uri: imgUri }}>
                 <Text numberOfLines={1} style={styles.topText}>
                     {cafeName}
@@ -33,7 +39,7 @@ const Like = (props) => {
                     {coffeeName}
                 </Text>
             </ImageBackground>
-        </View>
+        </TouchableOpacity>
     )
 }
 

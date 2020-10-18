@@ -11,6 +11,7 @@ import LoginScreen from "./src/screen/LoginScreen";
 import AuthLoadingScreen from "./src/screen/AuthLoadingScreen";
 import SignUp from "./src/screen/SignUpScreen";
 import GpsScreen from "./src/screen/GpsScreen";
+import CoffeeScreen from "./src/screen/CoffeeScreen";
 
 const AppStackNavigator = createStackNavigator(
     {
