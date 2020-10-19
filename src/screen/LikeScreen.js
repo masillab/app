@@ -5,7 +5,7 @@ import { Updates } from 'expo';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, Button, AsyncStorage, Alert } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import Like from "../components/Like";
+import CoffeeIcon from "../components/CoffeeIcon";
 import AppButton from "../components/AppButton";
 const APIURI = "http://ec2-3-34-96-202.ap-northeast-2.compute.amazonaws.com:3000/";
 
@@ -50,7 +50,7 @@ export class LikeScreen extends Component {
                 <View style={{ margin: 15 }}></View>
                 <View style={styles.coffeeContainer}>
                     {this.state.coffees.map((n) => (
-                        <Like 
+                        <CoffeeIcon 
                             navigation={this.props.navigation}
                             coffeeId={n.coffeeId} 
                             key={n.coffeeId} />

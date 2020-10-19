@@ -14,44 +14,6 @@ import CafeMenuScreen from "./CafeMenuScreen";
 import CoffeeScreen from "./CoffeeScreen";
 import { createAppContainer, NavigationEvents } from 'react-navigation';
 
-const AllCafeStack = createStackNavigator(
-    {
-        AllCafe: {
-            screen: AllCafeScreen
-        },
-        CafeMenu: {
-            screen: CafeMenuScreen
-        }
-    },
-    {
-        initialRouteName: 'AllCafe',
-        defaultNavigationOptions: {
-            headerStyle: {
-                backgroundColor: '#BDAFA2',
-            }
-        }
-    }
-)
-
-const LikeStack = createStackNavigator(
-    {
-        Like: {
-            screen: LikeScreen
-        },
-        Coffee: {
-            screen: CoffeeScreen
-        }
-    },
-    {
-        initialRouteName: 'Like',
-        defaultNavigationOptions: {
-            headerStyle: {
-                backgroundColor: '#BDAFA2',
-            }
-        }
-    }
-)
-
 const TabNavigator = createBottomTabNavigator(
     {
         홈: {
@@ -61,10 +23,10 @@ const TabNavigator = createBottomTabNavigator(
             screen: RankScreen,
         },
         전체메뉴: {
-            screen: AllCafeStack,
+            screen: AllCafeScreen,
         },
         나의메뉴: {
-            screen: LikeStack,
+            screen: LikeScreen,
         }
     },
     {
@@ -97,24 +59,47 @@ const TabNavigator = createBottomTabNavigator(
                 backgroundColor: '#BDAFA2',
             },
         },
-    });
+    }
+);
 
-const AppTabContainer = createAppContainer(TabNavigator);
+const CoffeeStack = createStackNavigator(
+    {
+        Tabs: {
+            screen: TabNavigator
+        },
+        CafeMenu:{
+            screen: CafeMenuScreen
+        },
+        Coffee: {
+            screen: CoffeeScreen
+        }
+    },
+    {
+        initialRouteName: 'Tabs',
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: '#BDAFA2',
+            }
+        }
+    }
+)
+
+const AppTabContainer = createAppContainer(CoffeeStack);
 
 export default class MainScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
         headerTitle: () => <Text style={{ fontSize: 24 }}>마실랩</Text>,
         //headerLeft: () => <Ionicons name='md-navigate' size={25} color="#6D3E31" style={{ paddingRight:20 }}/>,
-        headerRight: () =>  <Ionicons.Button 
-                                name='md-navigate' 
-                                size={30} 
-                                color="#6D3E31"
-                                backgroundColor="#BDAFA2" 
-                                onPress={() => navigation.navigate('GPS')}
-                                style={{ paddingRight: 20 }} 
-                            />,
+        headerRight: () => <Ionicons.Button
+            name='md-navigate'
+            size={30}
+            color="#6D3E31"
+            backgroundColor="#BDAFA2"
+            onPress={() => navigation.navigate('GPS')}
+            style={{ paddingRight: 20 }}
+        />,
     });
-    
+
     render() {
         return <AppTabContainer />;
     }
