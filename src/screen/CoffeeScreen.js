@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Image, Text, View, StyleSheet } from 'react-native';
+import AppButton from '../components/AppButton';
 const APIURI = "http://ec2-3-34-96-202.ap-northeast-2.compute.amazonaws.com:3000/";
 
 const Coffee = ({ navigation }) => {
@@ -32,18 +33,18 @@ const Coffee = ({ navigation }) => {
         }
     }
     return (
-        <View>
+        <View style={Styles.container}>
             <Image style={Styles.img} source={{ uri: imgUri }}/>
             <Text style={Styles.cafeText}>
                 {cafeName}
             </Text>
-            <Text>
+            <Text style={Styles.coffeeText}>
                 {coffeeName}
             </Text>
-            <Text>
+            <Text style={Styles.pointText}>
                 평점 : {pointAvg}
             </Text>
-            
+            <AppButton title="좋아요" size="sm" />
         </View>
     )
 }
@@ -51,11 +52,35 @@ const Coffee = ({ navigation }) => {
 export default Coffee;
 
 export const Styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
     img: {
-        width: 100,
-        height: 100,
+        marginTop: 50,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        width: 200,
+        height: 200,
     },
     cafeText: {
+        marginTop: 25,
+        marginLeft: "auto",
+        marginRight: "auto",
+        fontSize: 20,
         textTransform: "uppercase",
+    },
+    coffeeText: {
+        marginTop: 5,
+        marginLeft: "auto",
+        marginRight: "auto",
+        fontWeight: "bold",
+        fontSize: 25,
+    },
+    pointText: {
+        marginTop: 15,
+        marginLeft: "auto",
+        marginRight: "auto",
+        marginBottom: 10,
+        fontSize: 20,
     }
 })

@@ -35,12 +35,14 @@ export default class LoginScreen extends React.Component {
                 <TextInput
                     style={styles.inputContainer}
                     placeholder="이메일"
+                    autoCapitalize= "none"
                     onChangeText={text => this.setState({ email: text })}
                 />
                 <TextInput
                     style={styles.inputContainer}
                     secureTextEntry={true}
                     placeholder="비밀번호"
+                    autoCapitalize= "none"
                     onChangeText={text => this.setState({ password: text })}
                 />
                 <View style={{ margin: 30 }}></View>

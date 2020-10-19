@@ -30,17 +30,20 @@ export default class SignUpScreen extends React.Component {
                 <TextInput
                     style={styles.inputContainer}
                     placeholder="이메일"
+                    autoCapitalize= "none"
                     onChangeText={text => this.setState({ email: text })}
                 />
                 <TextInput
                     style={styles.inputContainer}
                     placeholder="비밀번호"
+                    autoCapitalize= "none"
                     secureTextEntry={true}
                     onChangeText={text => this.setState({ password: text })}
                 />
                 <TextInput
                     style={styles.inputContainer}
                     placeholder="비밀번호 확인"
+                    autoCapitalize= "none"
                     secureTextEntry={true}
                     onChangeText={text => this.setState({ passwordCheck: text })}
                 />
