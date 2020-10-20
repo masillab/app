@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform, View, Text, Image, ScrollView, Button, Alert } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
 import { Ionicons } from 'react-native-vector-icons';
-import gpsImg from '../images/gps.png';
 
 import AllCafeScreen from "./AllCafeScreen";
 import HomeScreen from "./HomeScreen";
 import RankScreen from "./RankScreen";
-import ProfileScreen from "./ProfileScreen";
 import LikeScreen from "./LikeScreen";
 import CafeMenuScreen from "./CafeMenuScreen";
 import CoffeeScreen from "./CoffeeScreen";
@@ -18,9 +16,6 @@ const TabNavigator = createBottomTabNavigator(
     {
         홈: {
             screen: HomeScreen,
-        },
-        랭킹: {
-            screen: RankScreen,
         },
         전체메뉴: {
             screen: AllCafeScreen,
@@ -36,8 +31,6 @@ const TabNavigator = createBottomTabNavigator(
                 let iconName;
                 if (routeName === '홈') {
                     iconName = 'ios-home';
-                } else if (routeName === '랭킹') {
-                    iconName = 'ios-medal';
                 } else if (routeName === '전체메뉴') {
                     iconName = 'ios-cafe';
                 } else if (routeName === '나의메뉴') {

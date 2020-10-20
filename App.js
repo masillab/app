@@ -1,17 +1,15 @@
 
-import React from 'react';
+//import React from 'react';
 /*import { StyleSheet, Text, View } from 'react-native'; */
-import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Image } from 'react-native';
+//import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Image } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import LogoutScreen from "./src/screen/LogoutScreen";
 import MainScreen from "./src/screen/MainScreen";
 import LoginScreen from "./src/screen/LoginScreen";
 import AuthLoadingScreen from "./src/screen/AuthLoadingScreen";
 import SignUp from "./src/screen/SignUpScreen";
 import GpsScreen from "./src/screen/GpsScreen";
-import CoffeeScreen from "./src/screen/CoffeeScreen";
 
 const AppStackNavigator = createStackNavigator(
     {

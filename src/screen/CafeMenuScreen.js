@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, ScrollView, Text, StyleSheet } from 'react-native';
+import { View, ScrollView, FlatList, Text, StyleSheet } from 'react-native';
 import CoffeeIcon from "../components/CoffeeIcon";
-const APIURI = "http://ec2-3-34-96-202.ap-northeast-2.compute.amazonaws.com:3000/";
+import config from "../config.json";
+const APIURI = config.APIURI;
 
 export default class CafeMenu extends React.Component {
     state = {
@@ -21,6 +22,7 @@ export default class CafeMenu extends React.Component {
 
     render() {
         return (
+            /*
             <ScrollView>
                 <View style={Styles.container}>
                     {this.state.coffees.map((n) => (
@@ -32,16 +34,33 @@ export default class CafeMenu extends React.Component {
 
                 </View>
             </ScrollView>
+            */
+            <FlatList 
+                data={this.state.coffees}
+                renderItem={({item}) =>{
+                    return (
+                        <CoffeeIcon
+                            navigation={this.props.navigation}
+                            coffeeId={item._id}
+                            key={item._id} />
+                    )
+                }}
+                onEndReached={this.endReached}
+                onEndReachedThreshold={.7}
+                numColumns={3}
+                initialNumToRender={21}
+                keyExtractor={(item) => item._id } />
         )
-
     }
 }
-
 
 export const Styles = StyleSheet.create({
     container: {
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
+    },
+    flatList:{
+        flexDirection: "column",
     }
 })

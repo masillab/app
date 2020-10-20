@@ -1,0 +1,4 @@
+{
+    "APIURItest": "localhost:3000/",
+    "APIURI": "http://ec2-3-34-96-202.ap-northeast-2.compute.amazonaws.com:3000/"
+}

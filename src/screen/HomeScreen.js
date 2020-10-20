@@ -2,18 +2,17 @@
  * 전체 카페 랭킹 (3위까지), 전체 커피 랭킹 (3위), 
 **/
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-import Home from "../components/Home";
-import { Ionicons } from 'react-native-vector-icons';
-
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import CoffeeCard from '../components/CoffeeCard';
 
 export class HomeScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.feedContainer}>
-                    <Home />
+                    <Text style={styles.text}>최고 인기!</Text>
+                    <CoffeeCard />
+                    <Text style={styles.text}>개인 추천!</Text>
                 </ScrollView>
             </View>
         )
@@ -27,40 +26,15 @@ export const styles = StyleSheet.create({
         display: 'flex',
         flex: 5
     },
-    header: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        top: 20,
-        padding: 15,
-        borderBottomColor: Colors.grayl,
-        borderBottomWidth: 0.5
-    },
-    footer: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        bottom: 20,
-        padding: 17,
-        borderTopColor: Colors.grayl,
-        borderTopWidth: 0.5
-    },
     feedContainer: {
         display: 'flex',
         flex: 1
     },
-    icon: {
-        width: 32,
-        height: 32
+    text: {
+        fontSize: 15,
+        paddingLeft: 20,
+        padding: 7,
+        backgroundColor: '#F4E2D2'
     },
-    logo: {
-        width: 150,
-        height: '100%'
-    },
-    headerRightWrap: {
-        display: 'flex',
-        flexDirection: 'row',
-
-    }
 })
 

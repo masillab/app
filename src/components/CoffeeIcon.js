@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react'
-import {View, Text, Image, ImageBackground, StyleSheet, TouchableOpacity} from 'react-native'
-const APIURI = "http://ec2-3-34-96-202.ap-northeast-2.compute.amazonaws.com:3000/";
+import {Text, ImageBackground, StyleSheet, TouchableOpacity} from 'react-native'
+import config from "../config.json";
+const APIURI = config.APIURI;
 
-const Like = ({ coffeeId, navigation }) => {
+const CoffeeIcon = ({ coffeeId, navigation }) => {
     const [cafeName, setCafeName] = useState('');
     const [coffeeName, setCoffeeName] = useState('');
     const [imgUri, setImgUri] = useState('src\images\coffee.png');
 
     useEffect(() => {
-        getCoffeeData();
-    });
+        let isMount = true;
+        getCoffeeData(isMount);
+        return () => {
+            isMount = false
+        };
+    }, []);
 
-    const getCoffeeData = async () => {
+    const getCoffeeData = async (isMount) => {
         coffeeUri = APIURI + "api/coffee/getCoffeeById/" + coffeeId;
+        if(!isMount) return;
         try{
             let coffeeData = await fetch(coffeeUri);
             let coffeeJson = await coffeeData.json();
@@ -43,7 +49,7 @@ const Like = ({ coffeeId, navigation }) => {
     )
 }
 
-export default Like
+export default CoffeeIcon
 
 export const styles=StyleSheet.create({
     container:{

@@ -3,11 +3,11 @@
 **/
 import { Updates } from 'expo';
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, Button, AsyncStorage, Alert } from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { StyleSheet, Text, View, ScrollView, AsyncStorage, Alert } from 'react-native';
 import CoffeeIcon from "../components/CoffeeIcon";
 import AppButton from "../components/AppButton";
-const APIURI = "http://ec2-3-34-96-202.ap-northeast-2.compute.amazonaws.com:3000/";
+import config from "../config.json";
+const APIURI = config.APIURI;
 
 export class LikeScreen extends Component {
     constructor(props) {
@@ -59,10 +59,6 @@ export class LikeScreen extends Component {
             </ScrollView>
         )
     };
-
-    getCoffee(){
-
-    }
 
     async removeItemValue() {
         let token = await AsyncStorage.getItem('userToken');

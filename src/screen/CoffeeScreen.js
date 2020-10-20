@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Image, Text, View, StyleSheet } from 'react-native';
+import { Image, Text, View, StyleSheet, AsyncStorage } from 'react-native';
 import AppButton from '../components/AppButton';
-const APIURI = "http://ec2-3-34-96-202.ap-northeast-2.compute.amazonaws.com:3000/";
+import config from "../config.json";
+const APIURI = config.APIURI;
 
 const Coffee = ({ navigation }) => {
     const coffeeId = navigation.getParam('coffeeId', 'NO-ID');
@@ -9,15 +10,24 @@ const Coffee = ({ navigation }) => {
     const [coffeeName, setCoffeeName] = useState('');
     const [imgUri, setImgUri] = useState('src\images\coffee.png');
     const [pointAvg, setPointAvg] = useState(0);
+    const [isLiked, setIsLiked] = useState(false);
+    const [userId, setUserId] = useState('');
 
     useEffect(() => {
-        getCoffeeData();
+        let isMount = true;
+        getCoffeeData(isMount);
+        return () => {
+            isMount = false;
+        }
     }, []);
 
-    const getCoffeeData = async () => {
+    const getCoffeeData = async (isMount) => {
+        if(!isMount) return;
+        let userToken = await AsyncStorage.getItem('userToken');
         let coffeeUri = APIURI + "api/coffee/getCoffeeById/" + coffeeId;
         let coffeePointUri = APIURI + "api/coffee/getCoffeePointAvg/" + coffeeId;
-        try{
+        let userUri = APIURI + "api/user/getUserByEmail/" + userToken;
+        try {
             let coffeeData = await fetch(coffeeUri);
             let coffeeJson = await coffeeData.json();
             setCafeName(coffeeJson.cafeName);
@@ -26,15 +36,66 @@ const Coffee = ({ navigation }) => {
 
             let coffeePointData = await fetch(coffeePointUri);
             let coffeePointJson = await coffeePointData.json();
-            if(isNaN(coffeePointJson.avg)) setPointAvg(0);
+            if (isNaN(coffeePointJson.avg)) setPointAvg(0);
             else setPointAvg(coffeePointJson.avg);
+
+            let userData = await fetch(userUri);
+            let userJson = await userData.json();
+            let userLikes = userJson.likes;
+            setUserId(userJson._id);
+            if (userLikes.find(i => i.coffeeId == coffeeId) != undefined) {
+                setIsLiked(true)
+            }
         } catch (err) {
             console.log(err.message);
         }
     }
+
+    const likeButton = (isLiked) => {
+        if (isLiked) {
+            return (
+                <AppButton
+                    title="좋아요 취소"
+                    size="sm"
+                    backgroundColor="gray"
+                    onPress={disLike} />
+            )
+        }
+        return <AppButton
+            title="좋아요"
+            size="sm"
+            backgroundColor="#68BBAF"
+            onPress={like} />
+    }
+
+    const like = async () => {
+        let likeUri = APIURI + "api/user/userLikeInsert/" + userId + '/' + coffeeId;
+        try {
+            const insertRes = await fetch(likeUri, {
+                method: "put",
+            });
+            setIsLiked(true);
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+
+    const disLike = async () => {
+        let disLikeUri = APIURI + "api/user/userLikeDelete/" + userId + '/' + coffeeId;
+        try {
+            const deleteRes = await fetch(disLikeUri, {
+                method: "put",
+            });
+            setIsLiked(false);
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+
+
     return (
         <View style={Styles.container}>
-            <Image style={Styles.img} source={{ uri: imgUri }}/>
+            <Image style={Styles.img} source={{ uri: imgUri }} />
             <Text style={Styles.cafeText}>
                 {cafeName}
             </Text>
@@ -44,7 +105,7 @@ const Coffee = ({ navigation }) => {
             <Text style={Styles.pointText}>
                 평점 : {pointAvg}
             </Text>
-            <AppButton title="좋아요" size="sm" />
+            {likeButton(isLiked)}
         </View>
     )
 }

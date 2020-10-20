@@ -12,7 +12,8 @@ import {
 } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import AppButton from "../components/AppButton";
-const APIURI = "http://ec2-3-34-96-202.ap-northeast-2.compute.amazonaws.com:3000/";
+import config from "../config.json";
+const APIURI = config.APIURI;
 
 
 export default class LoginScreen extends React.Component {
