@@ -8,13 +8,14 @@ import CoffeeCard from '../components/CoffeeCard';
 export class HomeScreen extends Component {
     render() {
         return (
-            <View style={styles.container}>
-                <ScrollView style={styles.feedContainer}>
-                    <Text style={styles.text}>최고 인기!</Text>
-                    <CoffeeCard />
-                    <Text style={styles.text}>개인 추천!</Text>
-                </ScrollView>
-            </View>
+            <ScrollView style={styles.feedContainer}>
+                <Text style={styles.text}>최고 인기!</Text>
+                <CoffeeCard
+                    navigation={this.props.navigation}
+                    coffeeId="5f8bc833a867981e0ca726a4" />
+                <Text style={styles.text}>개인 추천!</Text>
+                <Text style={{fontSize: 15, paddingLeft: 30, backgroundColor: '#ECE8DF' }}> 준비중..!</Text>
+            </ScrollView>
         )
     }
 }
@@ -31,10 +32,10 @@ export const styles = StyleSheet.create({
         flex: 1
     },
     text: {
-        fontSize: 15,
+        fontSize: 18,
         paddingLeft: 20,
         padding: 7,
-        backgroundColor: '#F4E2D2'
+        backgroundColor: '#E9DCBE'
     },
 })
 

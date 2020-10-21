@@ -45,6 +45,7 @@ export class LikeScreen extends Component {
                     size="sm"
                     title="로그아웃"
                     onPress={this.removeItemValue}
+                    margin={80}
                     backgroundColor="#6D3E31"
                 />
                 <View style={{ margin: 15 }}></View>

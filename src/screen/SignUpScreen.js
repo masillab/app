@@ -76,6 +76,7 @@ export default class SignUpScreen extends React.Component {
                     title="회원가입"
                     size="sm"
                     onPress={this._signUpAsync}
+                    margin={80}
                     backgroundColor="#6D3E31"
                 />
             </View>

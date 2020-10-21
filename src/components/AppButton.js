@@ -7,7 +7,7 @@ import {
 
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
-const AppButton = ({ onPress, title, size, backgroundColor }) => (
+const AppButton = ({ onPress, title, size, margin, backgroundColor, fontColor }) => (
 	<TouchableOpacity
 		onPress={onPress}
 		style={[
@@ -17,10 +17,13 @@ const AppButton = ({ onPress, title, size, backgroundColor }) => (
 				paddingVertical: 6,
 				elevation: 6
 			},
-			backgroundColor && { backgroundColor }
+			backgroundColor && { backgroundColor },
+			margin && {marginLeft: margin, marginRight: margin}
 		]}
 	>
-		<Text style={[styles.appButtonText, size === "sm" && { fontSize: 14 }]}>
+		<Text style={[styles.appButtonText, 
+					size === "sm" && { fontSize: 14 },
+					fontColor && {color: fontColor}]}>
 			{title}
 		</Text>
 	</TouchableOpacity>
@@ -32,8 +35,9 @@ const styles = StyleSheet.create({
 	appButtonContainer: {
 		height: 36,
 		marginTop: 8,
-		marginLeft: 80,
-		marginRight: 80,
+		marginLeft: 0,
+		marginRight: 0,
+		marginBottom: 8,
 		elevation: 8,
 		backgroundColor: "#009688",
 		borderRadius: 10,

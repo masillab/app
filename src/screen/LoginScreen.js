@@ -51,12 +51,14 @@ export default class LoginScreen extends React.Component {
                     title="로그인"
                     size="sm"
                     onPress={this._signInAsync}
+                    margin={80}
                     backgroundColor="#6D3E31"
                 />
                 <AppButton
                     title="회원가입"
                     size="sm"
                     onPress={() => this.props.navigation.navigate('SignUp')}
+                    margin={80}
                     backgroundColor="#6D3E31"
                 />
             </View>

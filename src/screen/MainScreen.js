@@ -81,7 +81,7 @@ const AppTabContainer = createAppContainer(CoffeeStack);
 
 export default class MainScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
-        headerTitle: () => <Text style={{ fontSize: 24 }}>마실랩</Text>,
+        headerTitle: () => <Text style={{ fontSize: 24, fontWeight: "bold" }}>마실랩</Text>,
         //headerLeft: () => <Ionicons name='md-navigate' size={25} color="#6D3E31" style={{ paddingRight:20 }}/>,
         headerRight: () => <Ionicons.Button
             name='md-navigate'
