@@ -7,12 +7,12 @@ const CoffeeIcon = ({ coffeeId, navigation }) => {
     const [cafeName, setCafeName] = useState('');
     const [coffeeName, setCoffeeName] = useState('');
     const [imgUri, setImgUri] = useState('src\images\coffee.png');
+    const [isMount, setIsMount] = useState(true);
 
     useEffect(() => {
-        let isMount = true;
         getCoffeeData(isMount);
         return () => {
-            isMount = false
+            setIsMount(false);
         };
     }, []);
 

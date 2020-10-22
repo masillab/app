@@ -54,7 +54,7 @@ const CoffeeCard = ({navigation, coffeeId}) => {
             }}
             style={styles.container}>
             <Image style={styles.img} source={{uri: coffeeImg}} />
-            <Text style={styles.cafeText}>{cafeName}</Text>
+            <Text numberOfLines={1} style={styles.cafeText}>{cafeName}</Text>
             <Text numberOfLines={1} style={styles.coffeeText}>{coffeeName}</Text>
             <Text style={styles.coffeePointText}>{pointAvg}</Text>
         </TouchableOpacity>
@@ -78,11 +78,12 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     cafeText: {
+        width: 80,
         fontSize: 16,
         fontWeight: "bold",
     },
     coffeeText: {
-        paddingLeft: 5,
+        width: 170,
         fontSize: 17,
         fontWeight: '900',
     },
