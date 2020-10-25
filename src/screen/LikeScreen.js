@@ -3,45 +3,62 @@
 **/
 import { Updates } from 'expo';
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, Button, AsyncStorage, Alert } from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-import Like from "../components/Like";
+import { StyleSheet, Text, View, ScrollView, AsyncStorage, Alert } from 'react-native';
+import CoffeeIcon from "../components/CoffeeIcon";
+import AppButton from "../components/AppButton";
+import config from "../config.json";
+const APIURI = config.APIURI;
 
 export class LikeScreen extends Component {
-    state = {
-        email: '',
-    };
-
     constructor(props) {
         super(props);
-        this.getUserEmail();
+    }
+
+    state = {
+        email: '',
+        coffees: []
+    };
+
+    async componentDidMount() {
+        try {
+            let userToken = await AsyncStorage.getItem('userToken');
+            this.setState({ email: userToken });
+            let userUri = APIURI + "api/user/getUserByEmail/" + userToken;
+            let res = await fetch(userUri);
+            let userJson = await res.json();
+            this.setState({ coffees: userJson.likes });
+        } catch (err) {
+            Alert.alert('err', err.message);
+        }
     }
 
     render() {
         const { email } = this.state;
         return (
-            <View style={styles.container}>
-                <ScrollView style={styles.feedContainer}>
-                    <Text>
-                        {email}
-                    </Text>
-                    <Button
-                        title="logout"
-                        onPress={this.removeItemValue}
-                    />
-                    <Like />
-                </ScrollView>
-            </View>
+            <ScrollView style={styles.Container}>
+                <View style={{ margin: 15 }}></View>
+                <Text style={styles.idText}>
+                    {email}
+                </Text>
+                <View style={{ margin: 5 }}></View>
+                <AppButton
+                    size="sm"
+                    title="로그아웃"
+                    onPress={this.removeItemValue}
+                    margin={80}
+                    backgroundColor="#6D3E31"
+                />
+                <View style={{ margin: 15 }}></View>
+                <View style={styles.coffeeContainer}>
+                    {this.state.coffees.map((n) => (
+                        <CoffeeIcon 
+                            navigation={this.props.navigation}
+                            coffeeId={n.coffeeId} 
+                            key={n.coffeeId} />
+                    ))}
+                </View>
+            </ScrollView>
         )
-    };
-
-    async getUserEmail() {
-        try {
-            let userToken = await AsyncStorage.getItem('userToken');
-            this.setState({ email: userToken });
-        } catch (err) {
-            Alert.alert('err', err.message);
-        }
     };
 
     async removeItemValue() {
@@ -69,9 +86,18 @@ export const styles = StyleSheet.create({
         display: 'flex',
         flex: 1
     },
-    feedContainer: {
+    idText: {
+        fontSize: 20,
+        textAlign: "center",
+        fontWeight: 'bold',
+    },
+    coffeeContainer: {
         display: 'flex',
-        flex: 1
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+    },
+    logoutButton: {
+        margin: 100,
     },
     icon: {
         width: 40,

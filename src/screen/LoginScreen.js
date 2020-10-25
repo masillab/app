@@ -12,7 +12,8 @@ import {
 } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import AppButton from "../components/AppButton";
-const APIURI = "http://ec2-3-34-96-202.ap-northeast-2.compute.amazonaws.com:3000/";
+import config from "../config.json";
+const APIURI = config.APIURI;
 
 
 export default class LoginScreen extends React.Component {
@@ -35,12 +36,14 @@ export default class LoginScreen extends React.Component {
                 <TextInput
                     style={styles.inputContainer}
                     placeholder="이메일"
+                    autoCapitalize= "none"
                     onChangeText={text => this.setState({ email: text })}
                 />
                 <TextInput
                     style={styles.inputContainer}
                     secureTextEntry={true}
                     placeholder="비밀번호"
+                    autoCapitalize= "none"
                     onChangeText={text => this.setState({ password: text })}
                 />
                 <View style={{ margin: 30 }}></View>
@@ -48,12 +51,14 @@ export default class LoginScreen extends React.Component {
                     title="로그인"
                     size="sm"
                     onPress={this._signInAsync}
+                    margin={80}
                     backgroundColor="#6D3E31"
                 />
                 <AppButton
                     title="회원가입"
                     size="sm"
                     onPress={() => this.props.navigation.navigate('SignUp')}
+                    margin={80}
                     backgroundColor="#6D3E31"
                 />
             </View>

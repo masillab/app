@@ -1,13 +1,13 @@
 /* 회원가입 화면 
  *  
 **/
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, Button, AsyncStorage, TouchableOpacity, Alert } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, AsyncStorage, Alert } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { RadioButton } from 'react-native-paper';
 import AppButton from "../components/AppButton";
-
-const APIURI = "http://ec2-3-34-96-202.ap-northeast-2.compute.amazonaws.com:3000/";
+import config from "../config.json";
+const APIURI = config.APIURI;
 
 export default class SignUpScreen extends React.Component {
     state = {
@@ -30,17 +30,20 @@ export default class SignUpScreen extends React.Component {
                 <TextInput
                     style={styles.inputContainer}
                     placeholder="이메일"
+                    autoCapitalize= "none"
                     onChangeText={text => this.setState({ email: text })}
                 />
                 <TextInput
                     style={styles.inputContainer}
                     placeholder="비밀번호"
+                    autoCapitalize= "none"
                     secureTextEntry={true}
                     onChangeText={text => this.setState({ password: text })}
                 />
                 <TextInput
                     style={styles.inputContainer}
                     placeholder="비밀번호 확인"
+                    autoCapitalize= "none"
                     secureTextEntry={true}
                     onChangeText={text => this.setState({ passwordCheck: text })}
                 />
@@ -73,6 +76,7 @@ export default class SignUpScreen extends React.Component {
                     title="회원가입"
                     size="sm"
                     onPress={this._signUpAsync}
+                    margin={80}
                     backgroundColor="#6D3E31"
                 />
             </View>

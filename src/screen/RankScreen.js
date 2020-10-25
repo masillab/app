@@ -2,7 +2,7 @@
  *  
 **/
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Rank from "../components/Rank";
 

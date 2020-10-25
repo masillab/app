@@ -2,20 +2,41 @@
  * 전체 카페 랭킹 (3위까지), 전체 커피 랭킹 (3위), 
 **/
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-import Home from "../components/Home";
-import { Ionicons } from 'react-native-vector-icons';
-
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import CoffeeCard from '../components/CoffeeCard';
+import config from '../config.json';
+const APIURI = config.APIURI;
 
 export class HomeScreen extends Component {
+    state = {
+        coffees: []
+    };
+
+    async componentDidMount() {
+        try{
+            let topCoffeeUri = APIURI + "api/coffee/getPointTopCoffees"
+            let res = await fetch(topCoffeeUri);
+            let coffeeData = await res.json();
+            if(coffeeData.length > 10) coffeeData = coffeeData.slice(0, 10);
+            this.setState({coffees: coffeeData});
+        } catch(err) {
+            console.log(err.message);
+        }
+    }
+
     render() {
         return (
-            <View style={styles.container}>
-                <ScrollView style={styles.feedContainer}>
-                    <Home />
-                </ScrollView>
-            </View>
+            <ScrollView style={styles.feedContainer}>
+                <Text style={styles.text}>최고 인기!</Text>
+                {this.state.coffees.map((i) => (
+                    <CoffeeCard
+                        navigation={this.props.navigation}
+                        coffeeId={i.coffeeId}
+                        key={i.coffeeId} />
+                ))}
+                <Text style={styles.text}>개인 추천!</Text>
+                <Text style={{fontSize: 15, paddingLeft: 30, backgroundColor: '#ECE8DF' }}> 준비중..!</Text>
+            </ScrollView>
         )
     }
 }
@@ -27,40 +48,15 @@ export const styles = StyleSheet.create({
         display: 'flex',
         flex: 5
     },
-    header: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        top: 20,
-        padding: 15,
-        borderBottomColor: Colors.grayl,
-        borderBottomWidth: 0.5
-    },
-    footer: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        bottom: 20,
-        padding: 17,
-        borderTopColor: Colors.grayl,
-        borderTopWidth: 0.5
-    },
     feedContainer: {
         display: 'flex',
         flex: 1
     },
-    icon: {
-        width: 32,
-        height: 32
+    text: {
+        fontSize: 18,
+        paddingLeft: 20,
+        padding: 7,
+        backgroundColor: '#E9DCBE'
     },
-    logo: {
-        width: 150,
-        height: '100%'
-    },
-    headerRightWrap: {
-        display: 'flex',
-        flexDirection: 'row',
-
-    }
 })
 
