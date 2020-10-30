@@ -96,6 +96,7 @@ export default class SignUpScreen extends React.Component {
             Alert.alert('오류', '비밀번호 확인이 잘못되었습니다.');
             return 0;
         }
+        let birthInt = this.state.birthYear *= 1;
         try{
             const res = await fetch(signUpAPI, {
                 method: 'POST',
@@ -106,7 +107,7 @@ export default class SignUpScreen extends React.Component {
                 body: JSON.stringify({
                     email: this.state.email,
                     password: this.state.password,
-                    birthYear: this.state.birthYear,
+                    birthYear: birthInt,
                     gender: this.state.checked,
                 })
             })

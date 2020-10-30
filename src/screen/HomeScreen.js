@@ -2,23 +2,43 @@
  * 전체 카페 랭킹 (3위까지), 전체 커피 랭킹 (3위), 
 **/
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, AsyncStorage } from 'react-native';
 import CoffeeCard from '../components/CoffeeCard';
 import config from '../config.json';
 const APIURI = config.APIURI;
 
 export class HomeScreen extends Component {
     state = {
-        coffees: []
+        topCoffees: [],
+        ageLikes: [],
+        userBirthYear: null,
     };
 
     async componentDidMount() {
+        let userEmail = await AsyncStorage.getItem('userToken');
+        let userDataUri = APIURI + "api/user/getUserByEmail/" + userEmail;
+        let allUserUri = APIURI + "api/user/getUsers";
+        let topCoffeeUri = APIURI + "api/coffee/getPointTopCoffees"
         try{
-            let topCoffeeUri = APIURI + "api/coffee/getPointTopCoffees"
             let res = await fetch(topCoffeeUri);
             let coffeeData = await res.json();
-            if(coffeeData.length > 10) coffeeData = coffeeData.slice(0, 10);
-            this.setState({coffees: coffeeData});
+            if(coffeeData.length > 5) coffeeData = coffeeData.slice(0, 5);
+            this.setState({topCoffees: coffeeData});
+
+            let userRes = await fetch(userDataUri);
+            let userJson = await userRes.json();
+            this.setState({userBirthYear: userJson.birthYear});
+            
+            let allUserRes = await fetch(allUserUri);
+            let allUserJson = await allUserRes.json();
+            let ageSimilarUsers = allUserJson.filter(v => Math.abs(v.birthYear - this.state.userBirthYear) <= 5);
+            let ageSimilarUserLikes = new Set();
+            for(let i = 0; i < ageSimilarUsers.length; i++){
+                ageSimilarUsers[i].likes.forEach(j => ageSimilarUserLikes.add(j.coffeeId));
+            }
+            let tmp = [...ageSimilarUserLikes];
+            if(tmp.length > 5) tmp = tmp.slice(0, 5);
+            this.setState({ageLikes: tmp});
         } catch(err) {
             console.log(err.message);
         }
@@ -28,13 +48,20 @@ export class HomeScreen extends Component {
         return (
             <ScrollView style={styles.feedContainer}>
                 <Text style={styles.text}>최고 인기!</Text>
-                {this.state.coffees.map((i) => (
+                {this.state.topCoffees.map((i) => (
                     <CoffeeCard
                         navigation={this.props.navigation}
                         coffeeId={i.coffeeId}
                         key={i.coffeeId} />
                 ))}
-                <Text style={styles.text}>개인 추천!</Text>
+                <Text style={styles.text}>나이대 추천 {this.state.userBirthYear-5} ~ {this.state.userBirthYear+5} 년대생</Text>
+                {this.state.ageLikes.map((i) => (
+                    <CoffeeCard
+                        navigation={this.props.navigation}
+                        coffeeId={i}
+                        key={i} />
+                ))}
+                <Text style={styles.text}>취향 추천</Text>
                 <Text style={{fontSize: 15, paddingLeft: 30, backgroundColor: '#ECE8DF' }}> 준비중..!</Text>
             </ScrollView>
         )

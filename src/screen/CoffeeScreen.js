@@ -16,6 +16,7 @@ const CoffeeScreen = ({ navigation }) => {
     const [isPointed, setIsPointed] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const [starCount, setStarCount] = useState(0);
+    const [tags, setTags] = useState("");
 
     useEffect(() => {
         let isMount = true;
@@ -33,6 +34,15 @@ const CoffeeScreen = ({ navigation }) => {
         try {
             let coffeeData = await fetch(coffeeUri);
             let coffeeJson = await coffeeData.json();
+            let coffeeTags = coffeeJson.tags;
+            let tagsStr = "";
+            if(coffeeTags.length !== 0){
+                coffeeTags.forEach(i => {
+                    let tagtmp = i.tag;
+                    tagsStr += `#${tagtmp} `
+                });
+            }
+            setTags(tagsStr);
             setCafeName(coffeeJson.cafeName);
             setCoffeeName(coffeeJson.coffeeName);
             setImgUri(coffeeJson.imgUri);
@@ -226,6 +236,9 @@ const CoffeeScreen = ({ navigation }) => {
             <Text style={Styles.coffeeText}>
                 {coffeeName}
             </Text>
+            <Text style={Styles.tagText}>
+                {tags}
+            </Text>
             <Text style={Styles.pointText}>
                 평점 : {pointAvg}
             </Text>
@@ -247,6 +260,12 @@ export const Styles = StyleSheet.create({
         marginRight: 'auto',
         width: 200,
         height: 200,
+    },
+    tagText: {
+        marginLeft: "auto",
+        marginRight: "auto",
+        fontSize: 20,
+        color: "#488529",
     },
     cafeText: {
         marginTop: 25,
