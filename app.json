@@ -2,7 +2,7 @@
   "expo": {
     "name": "masillab",
     "slug": "masillab",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -24,7 +24,7 @@
       "config": { 
         "googleMaps": { "apiKey": "AIzaSyAqN8OHUTOQAaQGu2-8wKlott1Y-y21T5s" } 
       },
-      "versionCode": 2 
+      "versionCode": 3 
     },
     "web": {
       "favicon": "./assets/favicon.png"
