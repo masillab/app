@@ -23,6 +23,9 @@ const CoffeeIcon = ({ coffeeId, navigation }) => {
             let coffeeData = await fetch(coffeeUri);
             let coffeeJson = await coffeeData.json();
             setCafeName(coffeeJson.cafeName);
+            if(cafeName === "cafebene"){
+
+            }
             setCoffeeName(coffeeJson.coffeeName);
             setImgUri(coffeeJson.imgUri);
         } catch (err) {
@@ -62,13 +65,13 @@ export const styles=StyleSheet.create({
     },
     topText:{
         width: 100,
-        color: "white",
+        color: "#9A9494",
         fontWeight: "bold",
         marginBottom: "auto",
     },
     bottomText: {
         width: 100,
-        color: "white",
+        color: "#9A9494",
         fontWeight: "bold",
         marginTop: "auto",
     },

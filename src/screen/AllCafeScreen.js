@@ -24,12 +24,9 @@ export default class AllCafeScreen extends React.Component {
                     title="카페베네" 
                     backgroundColor="#875C36" 
                     onPress={() => {
-                        Alert.alert("작업중!", "조금만 기다려 주세요.")
-                        /*
                         this.props.navigation.navigate("CafeMenu", {
                             cafeName: "cafebene",
                         });
-                        */
                     }} 
                 />
                 <CafeCard 
