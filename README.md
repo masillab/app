@@ -1,7 +1,7 @@
 # app
 ☕졸업작품 - 취향 기반 음료추천 앱 (Front-End)
 
-[플레이스토어](https://play.google.com/store/apps/details?id=com.masilcompany.masillab)
+[~플레이스토어~](https://play.google.com/store/apps/details?id=com.masilcompany.masillab)
 
 ## COMMAND
 
